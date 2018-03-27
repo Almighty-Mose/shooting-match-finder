@@ -23,6 +23,11 @@ class ShootingMatchFinder::Scraper
                     :location => doc.css("#psMainContainer > div.row.lightBox > div.col-xs-12.clearfix > div:nth-child(1) > p:nth-child(3)").text.gsub("Location:", "").strip,
                     :entry_fee => doc.xpath('//*[@id="psMainContainer"]/div[2]/div[3]/div[1]/dl/dd/text()').text.strip,
                     :description => doc.xpath('//*[@id="psMainContainer"]/div[2]/div[3]/div[1]/p[3]').text}
+    else
+      match_info = {:match_start => doc.xpath('//*[@id="psMainContainer"]/div[2]/div[3]/div[1]/p[2]/strong').text.strip,
+                    :location => doc.xpath('//*[@id="psMainContainer"]/div[2]/div[3]/div[1]/p[3]').text.gsub("Location:", "").strip,
+                    :entry_fee => doc.xpath('//*[@id="psMainContainer"]/div[2]/div[3]/div[1]/dl/dd/text()').text.strip,
+                    :description => doc.xpath('//*[@id="psMainContainer"]/div[2]/div[3]/div[1]/p[4]').text}
     end
   end
 
