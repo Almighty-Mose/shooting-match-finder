@@ -19,8 +19,8 @@ class ShootingMatchFinder::Scraper
     doc = Nokogiri::HTML(open(match_url))
     #I want to be able to identify matches based on whether or not registration is open, since they need to scrape differently.
     if !doc.xpath('//*[@id="psMainContainer"]/div[2]/div[3]/div[1]/p[1]').text.include?("Registration opens")
-      match_info = {:match_start => doc.css("#psMainContainer > div.row.lightBox > div.col-xs-12.clearfix > div:nth-child(1) > p:nth-child(2) > strong").text.strip,
-                    :location => doc.css("#psMainContainer > div.row.lightBox > div.col-xs-12.clearfix > div:nth-child(1) > p:nth-child(3)").text.gsub("Location:", "").strip,
+      match_info = {:match_start => doc.xpath('//*[@id="psMainContainer"]/div[2]/div[3]/div[1]/p[1]/strong').text.strip,
+                    :location => doc.xpath('//*[@id="psMainContainer"]/div[2]/div[3]/div[1]/p[2]').text.gsub("Location:", "").strip,
                     :entry_fee => doc.xpath('//*[@id="psMainContainer"]/div[2]/div[3]/div[1]/dl/dd/text()').text.strip,
                     :description => doc.xpath('//*[@id="psMainContainer"]/div[2]/div[3]/div[1]/p[3]').text}
     else
