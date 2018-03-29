@@ -3,8 +3,6 @@ require 'nokogiri'
 
 class ShootingMatchFinder::Scraper
 
-  BASE_PATH = "https://practiscore.com"
-
   def self.scrape_matches(website_url) #This creates an array of hashes that we then use to create match objects.
     doc = Nokogiri::HTML(open(website_url))
     matches = doc.css(".list-group-item")
